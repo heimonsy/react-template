@@ -1,0 +1,24 @@
+{
+  "name": "webapp",
+  "homepage": "https://github.com/eleme/sash",
+  "authors": [
+    "heimonsy <heimonsy@gmail.com>"
+  ],
+  "description": "webapp templates",
+  "main": "",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/libs/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
