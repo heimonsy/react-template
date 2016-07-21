@@ -10,7 +10,7 @@ var plugins = [
       filename: 'index.html',
       template: './index.html',
       // options
-      title: 'Your Title',
+      title: 'React Templates',
     }),
     new webpack.ProvidePlugin({
           $: "jquery",
@@ -41,20 +41,15 @@ if (process.env.COMPRESS) {
 module.exports = {
     entry: [
       //'webpack/hot/only-dev-server',
-      "./app/app.jsx"
+      "./src/entry/index.jsx"
     ],
     output: {
         path: './dist/',
         filename: "bundle.[hash:6].js"
     },
     module: {
-        preLoaders: [
-          { test: /\.jsx$/, exclude: /node_modules|bower_components|crayfish\.js/, loader: 'jsxhint-loader' },
-          { test: /\.js$/, exclude: /node_modules|bower_components|crayfish\.js/, loader: 'jshint-loader' },
-        ],
         loaders: [
-            { test: /\.jsx?$/, loaders: ['react-hot', 'babel'], exclude: /bower_components|node_modules/ },
-            { test: /\.js$/, exclude: /bower_components|node_modules/, loader: 'babel-loader'},
+            { test: /\.jsx?$/, loaders: ['babel', 'eslint-loader'], exclude: /bower_components|node_modules/, include: __dirname},
             { test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css')},
             { test: /\.(gif|png|jpg|svg|ttf|woff2|woff|eot)$/, loader: 'url?limit=1000&name=[path][name].[hash:6].[ext]' }
         ]
@@ -63,41 +58,11 @@ module.exports = {
         root : [
           path.join(__dirname, "./bower_components"),
           path.join(__dirname, './node_modules'),
-          path.join(__dirname, './app'),
+          path.join(__dirname, './src'),
           path.join(__dirname, './css'),
           path.join(__dirname, './fonts'),
-        ]
+        ],
+        extensions: ['', '.js', '.jsx'],
     },
-    plugins: plugins,
-    jshint: {
-      camelcase: false,
-      quotmark: "double",
-      laxcomma: true,
-      esnext: true,
-      undef: true,
-      unused: true,
-      indent: 2,
-      node: true,
-      browser: true,
-      jquery: true,
-      globals: {
-        $: true,
-        $element: true,
-        console: true,
-        confirm: true,
-        alert: true,
-        angular: true,
-        Geohash: true,
-        objectStorage: true,
-        qq: true,
-        ga: true,
-        _: true,
-        __dirname: true,
-        TWEEN: true,
-        DomUtil: true,
-        live800: true,
-        globalWindowAttribute: true,
-        UserAddress: true
-      }
-    }
+    plugins: plugins
 };
